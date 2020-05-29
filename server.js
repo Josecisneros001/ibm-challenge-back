@@ -1,11 +1,13 @@
 const createError = require('http-errors');
 const express = require('express');
-var path = require('path');
+const path = require('path');
 const cors = require('./middleware/cors');
 const dotenv = require('dotenv');
-var { mongoose } = require('./db/mongoose');
-var patientsRouter = require('./routes/patients');
-var varsRouter = require('./routes/vars');
+const cookieParser = require('cookie-parser');
+const logger = require('morgan');
+const { mongoose } = require('./db/mongoose');
+const patientsRouter = require('./routes/patients');
+const varsRouter = require('./routes/vars');
 
 var app = express();
 dotenv.config();
@@ -14,6 +16,12 @@ dotenv.config();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 app.use(cors);
+app.use(logger('dev'));
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+app.use(cookieParser());
+app.use(express.static(path.join(__dirname, 'public')));
+
 app.use('/patient', patientsRouter);
 app.use('/var', varsRouter);
 
