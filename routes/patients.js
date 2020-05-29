@@ -51,7 +51,7 @@ router.patch('/:id', jsonParser, function (req, res, next) {
             covid19: req.body.ImgResult.covid19 || 0,
         };
     
-    if(req.body.xRayImg !== false)
+    if(req.body.xRayImg)
         params['xRayImg'] = req.body["xRayImg"];
     
     patients.updatePatient(id,params)

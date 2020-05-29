@@ -4,12 +4,14 @@ const cors = require('./middleware/cors');
 const dotenv = require('dotenv');
 var { mongoose } = require('./db/mongoose');
 var patientsRouter = require('./routes/patients');
+var varsRouter = require('./routes/vars');
 
 var app = express();
 dotenv.config();
 
 app.use(cors);
 app.use('/patient', patientsRouter);
+app.use('/var', varsRouter);
 
 app.use(function (req, res, next) {
     next(createError(404));
