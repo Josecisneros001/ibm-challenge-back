@@ -9,6 +9,9 @@ var varsRouter = require('./routes/vars');
 var app = express();
 dotenv.config();
 
+// view engine setup
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'jade');
 app.use(cors);
 app.use('/patient', patientsRouter);
 app.use('/var', varsRouter);
