@@ -18,7 +18,6 @@ const patientSchema = mongoose.Schema({
     dob: {
         type: String,
         required: true,
-        unique: true,
     },
     reason: {
         type: String,
